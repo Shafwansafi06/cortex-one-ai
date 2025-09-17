@@ -2,95 +2,89 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* CortexOne Design System - Enterprise AI Copilot
+Dark theme with gradients: black → deep-navy, electric blue accents, neon violet
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core CortexOne Dark Theme */
+    --background: 225 30% 6%; /* #0D0F1A */
+    --background-deep: 225 30% 11%; /* #1A1D2E */
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Glass morphism and cards */
+    --card: 225 30% 8%;
+    --card-foreground: 210 40% 98%;
+    --glass: 225 30% 8% / 0.6;
+    --glass-border: 210 40% 98% / 0.1;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Popover */
+    --popover: 225 30% 8%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
+    /* Electric Blue Primary Gradient */
+    --primary: 210 100% 50%; /* #0066FF */
+    --primary-bright: 195 100% 50%; /* #00C2FF */
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Neon Violet Secondary */
+    --secondary: 260 59% 59%; /* #9B51E0 */
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted states */
+    --muted: 225 30% 15%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accents for highlights */
+    --accent: 225 30% 15%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 84.2% 60.2%;
+    /* Status colors */
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
+    --success: 142 76% 36%;
+    --success-foreground: 210 40% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 225 30% 6%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Borders and inputs */
+    --border: 225 30% 18%;
+    --input: 225 30% 18%;
+    --ring: 210 100% 50%;
 
-    --radius: 0.5rem;
+    /* Radius system */
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-bright)));
+    --gradient-background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--background-deep)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--primary)));
+    --gradient-glass: linear-gradient(135deg, hsl(var(--glass)), hsl(var(--glass)));
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Shadows and glows */
+    --shadow-neon: 0 0 20px hsl(var(--primary) / 0.3);
+    --shadow-violet: 0 0 20px hsl(var(--secondary) / 0.3);
+    --shadow-glass: 0 8px 32px hsl(225 30% 0% / 0.3);
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Sidebar */
+    --sidebar-background: 225 30% 6%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 210 100% 50%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 225 30% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 225 30% 18%;
+    --sidebar-ring: 210 100% 50%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Dark theme is default for CortexOne */
   }
 }
 
@@ -100,6 +94,48 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-gradient-background text-foreground font-sans;
+    /* Force dark theme for CortexOne */
+    @apply dark;
+  }
+
+  /* Glassmorphism utilities */
+  .glass {
+    @apply bg-glass backdrop-blur-glass border border-white/10 shadow-glass;
+  }
+
+  .glass-card {
+    @apply glass rounded-xl p-6;
+  }
+
+  .neon-glow {
+    @apply shadow-neon;
+  }
+
+  .violet-glow {
+    @apply shadow-violet;
+  }
+
+  /* Voice mic animations */
+  .mic-ripple {
+    @apply absolute inset-0 rounded-full border-2 border-primary animate-ripple;
+  }
+
+  .mic-active {
+    @apply animate-pulse-glow;
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-all duration-300 hover:scale-105 hover:-translate-y-1;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-neon;
+  }
+
+  /* Text effects */
+  .text-gradient {
+    @apply bg-gradient-primary bg-clip-text text-transparent;
   }
 }
