@@ -1,0 +1,13 @@
+{
+  "pipeline": [
+    { "stage": "Applied", "count": 452 },
+    { "stage": "Screened", "count": 128 },
+    { "stage": "Interview", "count": 32 },
+    { "stage": "Offer", "count": 9 },
+    { "stage": "Hired", "count": 6 }
+  ],
+  "diversity": [
+    { "label": "Male", "value": 58 },
+    { "label": "Female", "value": 42 }
+  ]
+}

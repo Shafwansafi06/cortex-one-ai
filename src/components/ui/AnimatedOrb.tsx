@@ -63,14 +63,21 @@ export function AnimatedOrb({ size = 'lg', className }: AnimatedOrbProps) {
         ))}
       </motion.div>
 
+      {/* Static logo positioned above the rotating orb, sized to match the orb and clipped to a circle */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className={cn("rounded-full overflow-hidden flex items-center justify-center pointer-events-none", sizeClasses[size])}>
+          <img src="/logo.svg" alt="CortexOne logo" className="w-full h-full object-contain" />
+        </div>
+      </div>
+
       {/* Outer rings */}
       {[1, 2, 3].map((ring) => (
         <motion.div
           key={ring}
           className="absolute border border-primary/20 rounded-full"
           style={{
-            width: `${100 + ring * 30}%`,
-            height: `${100 + ring * 30}%`,
+            width: `${150 + ring * 30}%`,
+            height: `${150 + ring * 30}%`,
           }}
           animate={{
             rotate: ring % 2 === 0 ? 360 : -360,

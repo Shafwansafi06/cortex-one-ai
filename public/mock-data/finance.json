@@ -1,0 +1,13 @@
+{
+  "outstanding": [
+    { "month": "Nov", "outstanding": 180000, "paid": 320000 },
+    { "month": "Dec", "outstanding": 220000, "paid": 280000 },
+    { "month": "Jan", "outstanding": 150000, "paid": 350000 },
+    { "month": "Feb", "outstanding": 200000, "paid": 300000 }
+  ],
+  "gst": [
+    { "name": "Compliant", "value": 85 },
+    { "name": "Pending Review", "value": 12 },
+    { "name": "Non-Compliant", "value": 3 }
+  ]
+}

@@ -5,6 +5,7 @@ import { AnimatedGroup } from '@/components/ui/animated-group';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import SupportMockup from '@/components/mockups/SupportMockup';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
@@ -91,8 +92,10 @@ export default function Support() {
           Real-time Analysis
         </Badge>
       </motion.div>
+  {/* Mockup */}
+  <SupportMockup />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Call Transcript Analysis */}
         <AnimatedGroup preset="slide">
           <Card className="glass-card">

@@ -54,8 +54,8 @@ export function Sidebar({ className }: SidebarProps) {
                 transition={{ duration: 0.2 }}
                 className="flex items-center space-x-3"
               >
-                <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                  <Brain className="w-5 h-5 text-primary-foreground" />
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden bg-transparent">
+                  <img src="/logo.svg" alt="CortexOne" className="w-8 h-8 object-contain" />
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-gradient">CortexOne</h1>

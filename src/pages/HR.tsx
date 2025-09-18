@@ -5,6 +5,7 @@ import { AnimatedGroup } from '@/components/ui/animated-group';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import HRMockup from '@/components/mockups/HRMockup';
 import { Progress } from '@/components/ui/progress';
 
 export default function HR() {
@@ -55,8 +56,10 @@ export default function HR() {
           AI Active
         </Badge>
       </motion.div>
+  {/* Mockup */}
+  <HRMockup />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Resume Upload & Analysis */}
         <AnimatedGroup preset="slide">
           <Card className="glass-card">

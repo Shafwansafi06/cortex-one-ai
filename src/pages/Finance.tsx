@@ -5,6 +5,8 @@ import { AnimatedGroup } from '@/components/ui/animated-group';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import FinanceMockup from '@/components/mockups/FinanceMockup';
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
 
 export default function Finance() {
   const [uploadedInvoice, setUploadedInvoice] = useState<File | null>(null);
@@ -64,8 +66,10 @@ export default function Finance() {
           Processing Active
         </Badge>
       </motion.div>
+  {/* Mockup */}
+  <FinanceMockup />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Invoice Upload */}
         <AnimatedGroup preset="slide">
           <Card className="glass-card">
@@ -221,8 +225,18 @@ export default function Finance() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-64 flex items-center justify-center text-muted-foreground">
-              Financial analytics visualization coming soon
+            <div className="w-full h-64 md:h-96">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={outstandingInvoices} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.06} />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="outstanding" stroke="hsl(var(--primary))" strokeWidth={2} />
+                  <Line type="monotone" dataKey="paid" stroke="hsl(var(--secondary))" strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
             </div>
           </CardContent>
         </Card>

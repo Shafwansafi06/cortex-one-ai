@@ -6,6 +6,7 @@ import { InsightCard } from '@/components/ui/InsightCard';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
 
 const metricCards = [
   {
@@ -88,12 +89,12 @@ export default function Dashboard() {
         </Badge>
       </motion.div>
 
-      {/* Metrics Overview */}
-      <AnimatedGroup preset="slide" className="grid grid-cols-1 md:grid-cols-3 gap-6">
+  {/* Metrics Overview */}
+  <AnimatedGroup preset="slide" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {metricCards.map((metric, index) => {
           const Icon = metric.icon;
           return (
-            <Card key={index} className="glass-card hover-lift">
+            <Card key={index} className="glass-card hover-lift min-h-[120px]">
               <CardHeader className="flex flex-row items-center justify-between pb-3">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
                   {metric.title}
@@ -102,8 +103,8 @@ export default function Dashboard() {
                   <Icon className={`w-5 h-5 ${metric.color}`} />
                 </div>
               </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{metric.value}</div>
+          <CardContent>
+            <div className="text-2xl lg:text-3xl font-bold">{metric.value}</div>
                 <div className="flex items-center space-x-1 text-xs">
                   <TrendingUp 
                     className={`w-3 h-3 ${
@@ -128,11 +129,36 @@ export default function Dashboard() {
         <Card className="glass-card">
           <CardHeader>
             <CardTitle>Cross-Domain Performance Trends</CardTitle>
-            <CardDescription>AI efficiency scores across all domains</CardDescription>
+            <CardDescription>AI efficiency scores across HR, Finance & Support</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-64 flex items-center justify-center text-muted-foreground">
-              Performance analytics visualization coming soon
+            <div className="w-full h-64 md:h-96">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="colorHr" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.6}/>
+                      <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/>
+                    </linearGradient>
+                    <linearGradient id="colorFinance" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="hsl(var(--secondary))" stopOpacity={0.4}/>
+                      <stop offset="95%" stopColor="hsl(var(--secondary))" stopOpacity={0}/>
+                    </linearGradient>
+                    <linearGradient id="colorSupport" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#9F7AEA" stopOpacity={0.4}/>
+                      <stop offset="95%" stopColor="#9F7AEA" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.06} />
+                  <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+                  <YAxis tick={{ fontSize: 12 }} />
+                  <Tooltip />
+                  <Legend verticalAlign="top" />
+                  <Area type="monotone" dataKey="hr" stroke="hsl(var(--primary))" fillOpacity={1} fill="url(#colorHr)" />
+                  <Area type="monotone" dataKey="finance" stroke="hsl(var(--secondary))" fillOpacity={1} fill="url(#colorFinance)" />
+                  <Area type="monotone" dataKey="support" stroke="#9F7AEA" fillOpacity={1} fill="url(#colorSupport)" />
+                </AreaChart>
+              </ResponsiveContainer>
             </div>
           </CardContent>
         </Card>
@@ -150,22 +176,22 @@ export default function Dashboard() {
 
       {/* Quick Actions */}
       <AnimatedGroup preset="scale">
-        <Card className="glass-card">
+            <Card className="glass-card">
           <CardHeader>
             <CardTitle>Quick Actions</CardTitle>
             <CardDescription>Common workflows and uploads</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Button className="h-20 flex flex-col space-y-2 hover-glow">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <Button className="h-20 flex flex-col space-y-2 hover-glow w-full">
                 <FileText className="w-6 h-6" />
                 <span>Upload Resume</span>
               </Button>
-              <Button className="h-20 flex flex-col space-y-2 hover-glow">
+              <Button className="h-20 flex flex-col space-y-2 hover-glow w-full">
                 <DollarSign className="w-6 h-6" />
                 <span>Process Invoice</span>
               </Button>
-              <Button className="h-20 flex flex-col space-y-2 hover-glow">
+              <Button className="h-20 flex flex-col space-y-2 hover-glow w-full">
                 <Phone className="w-6 h-6" />
                 <span>Upload Call Recording</span>
               </Button>
