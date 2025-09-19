@@ -12,6 +12,7 @@ import Support from "./pages/Support";
 import Demo from "./pages/Demo";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import Settings from "./pages/Settings";
 import { AuthProvider } from "./lib/auth";
 import AuthGuard from "./components/AuthGuard";
 
@@ -33,6 +34,7 @@ const App = () => (
               <Route path="/finance" element={<AuthGuard><Layout><Finance /></Layout></AuthGuard>} />
               <Route path="/support" element={<AuthGuard><Layout><Support /></Layout></AuthGuard>} />
               <Route path="/demo" element={<AuthGuard><Layout><Demo /></Layout></AuthGuard>} />
+              <Route path="/settings" element={<AuthGuard><Layout><Settings /></Layout></AuthGuard>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>

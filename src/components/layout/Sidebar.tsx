@@ -55,7 +55,9 @@ export function Sidebar({ className }: SidebarProps) {
                 className="flex items-center space-x-3"
               >
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden bg-transparent">
-                  <img src="/logo.svg" alt="CortexOne" className="w-8 h-8 object-contain" />
+                  <Link to="/">
+                    <img src="/logo.svg" alt="CortexOne" className="w-8 h-8 object-contain" />
+                  </Link>
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-gradient">CortexOne</h1>
