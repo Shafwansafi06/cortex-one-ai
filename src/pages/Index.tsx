@@ -3,10 +3,31 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Brain, Users, DollarSign, Headphones, Zap, Shield, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/lib/auth';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { AnimatedOrb } from '@/components/ui/AnimatedOrb';
 import { AnimatedGroup } from '@/components/ui/animated-group';
+
+function EnterCTA() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  return (
+    <Button
+      size="lg"
+      className="bg-gradient-primary hover:opacity-90 px-8 py-4 text-lg"
+      onClick={() => {
+        if (user) navigate('/dashboard');
+        else navigate('/auth');
+      }}
+    >
+      <span>Enter CortexOne</span>
+      <ArrowRight className="w-5 h-5 ml-2" />
+    </Button>
+  );
+}
 
 export default function Index() {
   const [showDemo, setShowDemo] = useState(false);
@@ -91,12 +112,7 @@ export default function Index() {
               preset="scale" 
               className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
             >
-              <Button asChild size="lg" className="bg-gradient-primary hover:opacity-90 px-8 py-4 text-lg">
-                <Link to="/dashboard">
-                  <span>Enter CortexOne</span>
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Link>
-              </Button>
+              <EnterCTA />
               
               <Button 
                 variant="outline" 

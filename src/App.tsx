@@ -12,6 +12,8 @@ import Support from "./pages/Support";
 import Demo from "./pages/Demo";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import { AuthProvider } from "./lib/auth";
+import AuthGuard from "./components/AuthGuard";
 
 const queryClient = new QueryClient();
 
@@ -20,20 +22,22 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <div className="dark">
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
-            <Route path="/hr" element={<Layout><HR /></Layout>} />
-            <Route path="/finance" element={<Layout><Finance /></Layout>} />
-            <Route path="/support" element={<Layout><Support /></Layout>} />
-            <Route path="/demo" element={<Layout><Demo /></Layout>} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <div className="dark">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/dashboard" element={<AuthGuard><Layout><Dashboard /></Layout></AuthGuard>} />
+              <Route path="/hr" element={<AuthGuard><Layout><HR /></Layout></AuthGuard>} />
+              <Route path="/finance" element={<AuthGuard><Layout><Finance /></Layout></AuthGuard>} />
+              <Route path="/support" element={<AuthGuard><Layout><Support /></Layout></AuthGuard>} />
+              <Route path="/demo" element={<AuthGuard><Layout><Demo /></Layout></AuthGuard>} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

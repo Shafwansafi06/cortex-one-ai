@@ -7,23 +7,32 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { AnimatedOrb } from '@/components/ui/AnimatedOrb';
+import { useAuth } from '@/lib/auth';
+import { useNavigate } from 'react-router-dom';
 
 export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const auth = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // Simulate auth
-    setTimeout(() => {
+    try {
+      const ok = await auth.signin(email, password);
+      if (ok) {
+        navigate('/dashboard');
+        return;
+      }
+      // show an error state briefly
       setIsLoading(false);
-      // Redirect to dashboard
-      window.location.href = '/dashboard';
-    }, 2000);
+      // We could set an error state here; keep simple for now.
+    } catch (err) {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -127,7 +136,12 @@ export default function Auth() {
                 type="button"
                 variant="outline"
                 className="w-full border-primary/30 hover-glow"
-                onClick={() => window.location.href = '/dashboard'}
+                onClick={async () => {
+                  setIsLoading(true);
+                  const ok = await auth.signin('demo@cortex.one', 'demopassword');
+                  setIsLoading(false);
+                  if (ok) navigate('/dashboard');
+                }}
               >
                 Continue as Demo User
               </Button>
