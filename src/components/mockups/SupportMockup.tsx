@@ -69,18 +69,20 @@ export default function SupportMockup() {
         <CardContent>
           <div className="space-y-3">
             {recent.map((r) => (
-              <div key={r.id} className="flex items-center justify-between p-3 glass rounded-md">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center text-white"><User className="w-4 h-4" /></div>
-                  <div>
+              <div key={r.id} className="p-3 glass rounded-md">
+                <div className="flex items-center space-x-3 mb-3">
+                  <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center text-white">
+                    <User className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1">
                     <div className="font-medium">{r.customer}</div>
                     <div className="text-sm text-muted-foreground">{r.duration}</div>
                   </div>
-                </div>
-                <div className="flex items-center space-x-3">
                   <Badge className="text-muted-foreground">{r.sentiment}</Badge>
-                  <button className="btn btn-outline">View</button>
                 </div>
+                <button className="w-full btn btn-outline hover-glow">
+                  View Details
+                </button>
               </div>
             ))}
           </div>

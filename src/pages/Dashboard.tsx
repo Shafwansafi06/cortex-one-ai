@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Users, DollarSign, Headphones, TrendingUp, FileText, Phone } from 'lucide-react';
+import { Users, DollarSign, Headphones, TrendingUp, FileText, Phone, Brain } from 'lucide-react';
 import { AnimatedGroup } from '@/components/ui/animated-group';
 import { InsightCard } from '@/components/ui/InsightCard';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -71,22 +71,39 @@ const chartData = [
 
 export default function Dashboard() {
   return (
-    <div className="space-y-8">
-      {/* Header */}
+    <div className="space-y-6 md:space-y-8 mt-4 mobile-container">
+      {/* Mobile-Optimized Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between"
+        className="bg-background/95 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-border/40 shadow-lg"
       >
-        <div>
-          <h1 className="text-3xl font-bold text-gradient">CortexOne Dashboard</h1>
-          <p className="text-muted-foreground mt-2">
-            Unified enterprise AI insights across HR, Finance, and Customer Care
-          </p>
+        <div className="flex flex-col space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center shadow-lg">
+                <Brain className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl md:text-2xl font-bold text-gradient">Dashboard</h1>
+                <p className="text-xs md:text-sm text-muted-foreground">AI Intelligence Hub</p>
+              </div>
+            </div>
+            <Badge variant="outline" className="neon-glow px-3 py-1 bg-background/80 border-border/50">
+              <div className="w-2 h-2 bg-success rounded-full animate-pulse mr-2" />
+              Live
+            </Badge>
+          </div>
+          
+          <div className="bg-background/80 rounded-xl p-4 border border-border/40 shadow-sm">
+            <h2 className="text-sm md:text-base font-medium text-foreground mb-2">
+              Unified enterprise AI insights across HR, Finance, and Customer Care
+            </h2>
+            <p className="text-xs md:text-sm text-muted-foreground">
+              Real-time cross-domain analytics and predictive insights powered by advanced AI
+            </p>
+          </div>
         </div>
-        <Badge variant="outline" className="neon-glow">
-          Real-time Analytics
-        </Badge>
       </motion.div>
 
   {/* Metrics Overview */}
@@ -94,7 +111,7 @@ export default function Dashboard() {
         {metricCards.map((metric, index) => {
           const Icon = metric.icon;
           return (
-            <Card key={index} className="glass-card hover-lift min-h-[120px]">
+            <Card key={index} className="bg-background/90 backdrop-blur-sm border border-border/40 hover-lift min-h-[120px] shadow-lg">
               <CardHeader className="flex flex-row items-center justify-between pb-3">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
                   {metric.title}

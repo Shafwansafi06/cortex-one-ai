@@ -17,14 +17,14 @@ function EnterCTA() {
   return (
     <Button
       size="lg"
-      className="bg-gradient-primary hover:opacity-90 px-8 py-4 text-lg"
+      className="w-full sm:w-auto bg-gradient-primary hover:opacity-90 px-6 md:px-8 py-3 md:py-4 text-base md:text-lg"
       onClick={() => {
         if (user) navigate('/dashboard');
         else navigate('/auth');
       }}
     >
       <span>Enter CortexOne</span>
-      <ArrowRight className="w-5 h-5 ml-2" />
+      <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
     </Button>
   );
 }
@@ -68,7 +68,7 @@ export default function Index() {
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         </div>
 
-        <div className="relative z-10 container mx-auto px-6 py-20">
+        <div className="relative z-10 container mx-auto px-4 md:px-6 py-12 md:py-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -76,7 +76,7 @@ export default function Index() {
             className="text-center"
           >
             {/* Animated Orb */}
-            <div className="flex justify-center mb-12">
+            <div className="flex justify-center mb-8 md:mb-12">
               <AnimatedOrb size="xl" />
             </div>
 
@@ -85,22 +85,22 @@ export default function Index() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="max-w-4xl mx-auto mb-8"
+              className="max-w-4xl mx-auto mb-6 md:mb-8"
             >
-              <Badge variant="outline" className="mb-6 px-4 py-2 text-sm neon-glow">
-                <Brain className="w-4 h-4 mr-2" />
+              <Badge variant="outline" className="mb-4 md:mb-6 px-3 md:px-4 py-2 text-xs md:text-sm neon-glow">
+                <Brain className="w-3 h-3 md:w-4 md:h-4 mr-2" />
                 Enterprise AI Copilot
               </Badge>
               
-              <h1 className="text-6xl md:text-7xl font-bold mb-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6">
                 <span className="text-gradient">CortexOne</span>
               </h1>
               
-              <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-foreground/90">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 md:mb-6 text-foreground/90">
                 Unified AI for HR, Finance & Customer Care
               </h2>
               
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
                 Break down silos with intelligent cross-domain insights. 
                 CortexOne connects your enterprise data to deliver predictive analytics 
                 and automated decision-making across all departments.
@@ -110,7 +110,7 @@ export default function Index() {
             {/* CTA Buttons */}
             <AnimatedGroup 
               preset="scale" 
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+              className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center mb-12 md:mb-16 px-4"
             >
               <EnterCTA />
               
@@ -118,7 +118,7 @@ export default function Index() {
                 variant="outline" 
                 size="lg" 
                 onClick={() => setShowDemo(true)}
-                className="px-8 py-4 text-lg border-primary/30 hover-glow"
+                className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 text-base md:text-lg border-primary/30 hover-glow"
               >
                 Watch Demo
               </Button>

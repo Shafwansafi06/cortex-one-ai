@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bell, User, Search } from 'lucide-react';
+import { Bell, User, Search, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { motion } from 'framer-motion';
@@ -7,27 +7,45 @@ import { GlobalSearchBar } from '../ui/GlobalSearchBar';
 
 interface NavBarProps {
   sidebarCollapsed?: boolean;
+  onMobileMenuToggle?: () => void;
+  isMobile?: boolean;
 }
 
-export function NavBar({ sidebarCollapsed = false }: NavBarProps) {
+export function NavBar({ 
+  sidebarCollapsed = false, 
+  onMobileMenuToggle,
+  isMobile = false 
+}: NavBarProps) {
   return (
     <motion.header
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="fixed top-0 right-0 z-30 glass border-b border-border/50"
+      className="fixed top-0 right-0 z-30 bg-background/95 backdrop-blur-sm border-b border-border/50 shadow-lg"
       style={{
-        left: sidebarCollapsed ? 80 : 280,
-        width: sidebarCollapsed ? 'calc(100% - 80px)' : 'calc(100% - 280px)',
+        left: isMobile ? 0 : (sidebarCollapsed ? 80 : 280),
+        width: isMobile ? '100%' : (sidebarCollapsed ? 'calc(100% - 80px)' : 'calc(100% - 280px)'),
       }}
     >
-      <div className="flex items-center justify-between px-6 py-4">
+      <div className="flex items-center justify-between px-4 md:px-6 py-3">
+        {/* Mobile Menu Button */}
+        {isMobile && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onMobileMenuToggle}
+            className="p-2 hover-glow mr-3 rounded-lg bg-background/50 border border-border/30"
+          >
+            <Menu className="w-5 h-5" />
+          </Button>
+        )}
+
         {/* Global Search */}
         <div className="flex-1 max-w-2xl">
           <GlobalSearchBar />
         </div>
 
         {/* Right Actions */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 md:space-x-4">
           {/* Notifications */}
           <Button variant="ghost" size="sm" className="relative hover-glow">
             <Bell className="w-5 h-5" />

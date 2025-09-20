@@ -74,23 +74,39 @@ export default function Support() {
   };
 
   return (
-    <div className="space-y-8">
-      {/* Header */}
+    <div className="space-y-6 md:space-y-8 mt-4 mobile-container">
+      {/* Mobile-Optimized Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between"
+        className="bg-background/95 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-border/40 shadow-lg"
       >
-        <div>
-          <h1 className="text-3xl font-bold text-gradient">Customer Care AI</h1>
-          <p className="text-muted-foreground mt-2">
-            Intelligent call analysis and customer sentiment monitoring
-          </p>
+        <div className="flex flex-col space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                <Headphones className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl md:text-2xl font-bold text-gradient">Customer Care AI</h1>
+                <p className="text-xs md:text-sm text-muted-foreground">Support Intelligence</p>
+              </div>
+            </div>
+            <Badge variant="outline" className="neon-glow px-3 py-1 bg-background/80 border-purple-500/40">
+              <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse mr-2" />
+              Live Analysis
+            </Badge>
+          </div>
+          
+          <div className="bg-background/80 rounded-xl p-4 border border-border/40 shadow-sm">
+            <h2 className="text-sm md:text-base font-medium text-foreground mb-2">
+              Intelligent call analysis and customer sentiment monitoring
+            </h2>
+            <p className="text-xs md:text-sm text-muted-foreground">
+              Smart call analysis, sentiment tracking, and automated ticket routing for superior customer experience
+            </p>
+          </div>
         </div>
-        <Badge variant="outline" className="neon-glow">
-          <MessageSquare className="w-3 h-3 mr-1" />
-          Real-time Analysis
-        </Badge>
       </motion.div>
   {/* Mockup */}
   <SupportMockup />
@@ -270,13 +286,13 @@ export default function Support() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-center justify-between p-4 glass rounded-lg hover-lift"
+                  className="p-4 glass rounded-lg hover-lift"
                 >
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-4 mb-3">
                     <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
                       <User className="w-5 h-5 text-primary-foreground" />
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <p className="font-medium">{call.customer}</p>
                       <div className="flex items-center space-x-3 text-sm text-muted-foreground">
                         <span className="flex items-center space-x-1">
@@ -286,16 +302,16 @@ export default function Support() {
                         <span>{call.time}</span>
                       </div>
                     </div>
+                    <div className="flex items-center space-x-3">
+                      <Badge className={getSentimentColor(call.sentiment)}>
+                        {call.sentiment}
+                      </Badge>
+                      <span className="text-sm font-medium">{call.intent}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-4">
-                    <Badge className={getSentimentColor(call.sentiment)}>
-                      {call.sentiment}
-                    </Badge>
-                    <span className="text-sm font-medium min-w-24 text-right">{call.intent}</span>
-                    <Button size="sm" variant="outline" className="hover-glow">
-                      View Details
-                    </Button>
-                  </div>
+                  <Button size="sm" variant="outline" className="w-full hover-glow">
+                    View Details
+                  </Button>
                 </motion.div>
               ))}
             </div>

@@ -38,23 +38,39 @@ export default function HR() {
   ];
 
   return (
-    <div className="space-y-8">
-      {/* Header */}
+    <div className="space-y-6 md:space-y-8 mt-4 mobile-container">
+      {/* Mobile-Optimized Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between"
+        className="bg-background/95 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-border/40 shadow-lg"
       >
-        <div>
-          <h1 className="text-3xl font-bold text-gradient">HR Intelligence</h1>
-          <p className="text-muted-foreground mt-2">
-            AI-powered talent acquisition and workforce analytics
-          </p>
+        <div className="flex flex-col space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg">
+                <Users className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl md:text-2xl font-bold text-gradient">HR Intelligence</h1>
+                <p className="text-xs md:text-sm text-muted-foreground">Talent Acquisition AI</p>
+              </div>
+            </div>
+            <Badge variant="outline" className="neon-glow px-3 py-1 bg-background/80 border-blue-500/40">
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse mr-2" />
+              AI Active
+            </Badge>
+          </div>
+          
+          <div className="bg-background/80 rounded-xl p-4 border border-border/40 shadow-sm">
+            <h2 className="text-sm md:text-base font-medium text-foreground mb-2">
+              AI-powered talent acquisition and workforce analytics
+            </h2>
+            <p className="text-xs md:text-sm text-muted-foreground">
+              Intelligent candidate matching, leadership prediction, and comprehensive workforce insights
+            </p>
+          </div>
         </div>
-        <Badge variant="outline" className="neon-glow">
-          <Brain className="w-3 h-3 mr-1" />
-          AI Active
-        </Badge>
       </motion.div>
   {/* Mockup */}
   <HRMockup />
@@ -229,32 +245,36 @@ export default function HR() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-center justify-between p-4 glass rounded-lg hover-lift"
+                  className="p-4 glass rounded-lg hover-lift"
                 >
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-4 mb-3">
                     <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
                       <span className="text-sm font-medium text-primary-foreground">
                         {candidate.name.split(' ').map(n => n[0]).join('')}
                       </span>
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <p className="font-medium">{candidate.name}</p>
                       <p className="text-sm text-muted-foreground">{candidate.role}</p>
                     </div>
+                    <div className="flex items-center space-x-3">
+                      <Badge
+                        variant={candidate.status === 'Available' ? 'outline' : 'secondary'}
+                        className={candidate.status === 'Available' ? 'text-success border-success' : ''}
+                      >
+                        {candidate.status}
+                      </Badge>
+                      <span className="text-sm font-medium">{candidate.score}%</span>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-4">
-                    <Badge
-                      variant={candidate.status === 'Available' ? 'outline' : 'secondary'}
-                      className={candidate.status === 'Available' ? 'text-success border-success' : ''}
-                    >
-                      {candidate.status}
-                    </Badge>
-                    <span className="text-sm font-medium">{candidate.score}%</span>
-                    <Button size="sm" variant="outline" className="hover-glow">
-                      <Github className="w-4 h-4 mr-1" />
-                      Profile
-                    </Button>
-                  </div>
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    className="w-full hover-glow"
+                  >
+                    <Github className="w-4 h-4 mr-2" />
+                    View Profile
+                  </Button>
                 </motion.div>
               ))}
             </div>

@@ -10,13 +10,21 @@ import {
   ChevronLeft,
   ChevronRight,
   Home,
-  PlayCircle
+  PlayCircle,
+  ArrowLeft,
+  Menu
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 interface SidebarProps {
   className?: string;
+  collapsed?: boolean;
+  onToggleCollapse?: (collapsed: boolean) => void;
+  mobileOpen?: boolean;
+  onMobileToggle?: (open: boolean) => void;
+  isMobile?: boolean;
 }
 
 const navigationItems = [
@@ -28,49 +36,47 @@ const navigationItems = [
   { name: 'Settings', href: '/settings', icon: Settings },
 ];
 
-export function Sidebar({ className }: SidebarProps) {
-  const [collapsed, setCollapsed] = useState(false);
+export function Sidebar({ 
+  className, 
+  collapsed = false, 
+  onToggleCollapse, 
+  mobileOpen = false, 
+  onMobileToggle, 
+  isMobile = false 
+}: SidebarProps) {
   const location = useLocation();
 
-  return (
-    <motion.aside
-      initial={{ width: 280 }}
-      animate={{ width: collapsed ? 80 : 280 }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-      className={cn(
-        "fixed left-0 top-0 z-40 h-screen glass-card border-r border-border/50",
-        className
-      )}
-    >
-      <div className="flex h-full flex-col">
-        {/* Logo and Toggle */}
-        <div className="flex items-center justify-between p-6 border-b border-border/50">
-          <AnimatePresence>
-            {!collapsed && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="flex items-center space-x-3"
-              >
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden bg-transparent">
-                  <Link to="/">
-                    <img src="/logo.svg" alt="CortexOne" className="w-8 h-8 object-contain" />
-                  </Link>
-                </div>
-                <div>
-                  <h1 className="text-xl font-bold text-gradient">CortexOne</h1>
-                  <p className="text-xs text-muted-foreground">Enterprise AI</p>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-          
+  const SidebarContent = () => (
+    <div className="flex h-full flex-col">
+      {/* Logo and Toggle */}
+      <div className="flex items-center justify-between p-4 md:p-6 border-b border-border/50">
+        <AnimatePresence>
+          {!collapsed && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="flex items-center space-x-3"
+            >
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden bg-transparent">
+                <Link to="/">
+                  <img src="/logo.svg" alt="CortexOne" className="w-8 h-8 object-contain" />
+                </Link>
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-gradient">CortexOne</h1>
+                <p className="text-xs text-muted-foreground">Enterprise AI</p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        
+        {!isMobile && (
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => setCollapsed(!collapsed)}
+            onClick={() => onToggleCollapse?.(!collapsed)}
             className="p-2 hover-glow"
           >
             {collapsed ? (
@@ -79,67 +85,112 @@ export function Sidebar({ className }: SidebarProps) {
               <ChevronLeft className="w-4 h-4" />
             )}
           </Button>
-        </div>
-
-        {/* Navigation */}
-        <nav className="flex-1 space-y-2 p-4">
-          {navigationItems.map((item) => {
-            const isActive = location.pathname === item.href;
-            const Icon = item.icon;
-            
-            return (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={cn(
-                  "flex items-center space-x-3 rounded-lg px-3 py-3 transition-all duration-200",
-                  isActive
-                    ? "bg-primary/10 text-primary border border-primary/20 neon-glow"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent/50",
-                  "hover-lift"
-                )}
-              >
-                <Icon className={cn("w-5 h-5", isActive && "text-primary")} />
-                <AnimatePresence>
-                  {!collapsed && (
-                    <motion.span
-                      initial={{ opacity: 0, width: 0 }}
-                      animate={{ opacity: 1, width: "auto" }}
-                      exit={{ opacity: 0, width: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="text-sm font-medium whitespace-nowrap overflow-hidden"
-                    >
-                      {item.name}
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* Status Indicator */}
-        <div className="p-4 border-t border-border/50">
-          <AnimatePresence>
-            {!collapsed && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="glass rounded-lg p-3"
-              >
-                <div className="flex items-center space-x-3">
-                  <div className="w-3 h-3 bg-success rounded-full animate-pulse" />
-                  <div>
-                    <p className="text-xs font-medium">AI Status</p>
-                    <p className="text-xs text-success">All systems operational</p>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+        )}
+        
+        {isMobile && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => onMobileToggle?.(false)}
+            className="p-2 hover-glow rounded-full bg-background/50 border border-border/50"
+          >
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
+        )}
       </div>
+
+      {/* Navigation */}
+      <nav className="flex-1 space-y-2 p-4">
+        {navigationItems.map((item) => {
+          const isActive = location.pathname === item.href;
+          const Icon = item.icon;
+          
+          return (
+            <Link
+              key={item.name}
+              to={item.href}
+              onClick={() => isMobile && onMobileToggle?.(false)}
+              className={cn(
+                "flex items-center space-x-3 rounded-lg px-3 py-3 transition-all duration-200",
+                isActive
+                  ? "bg-primary/10 text-primary border border-primary/20 neon-glow"
+                  : "text-muted-foreground hover:text-foreground hover:bg-accent/50",
+                "hover-lift"
+              )}
+            >
+              <Icon className={cn("w-5 h-5", isActive && "text-primary")} />
+              <AnimatePresence>
+                {!collapsed && (
+                  <motion.span
+                    initial={{ opacity: 0, width: 0 }}
+                    animate={{ opacity: 1, width: "auto" }}
+                    exit={{ opacity: 0, width: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-sm font-medium whitespace-nowrap overflow-hidden"
+                  >
+                    {item.name}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </Link>
+          );
+        })}
+      </nav>
+
+      {/* Status Indicator */}
+      <div className="p-4 border-t border-border/50">
+        <AnimatePresence>
+          {!collapsed && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="glass rounded-lg p-3"
+            >
+              <div className="flex items-center space-x-3">
+                <div className="w-3 h-3 bg-success rounded-full animate-pulse" />
+                <div>
+                  <p className="text-xs font-medium">AI Status</p>
+                  <p className="text-xs text-success">All systems operational</p>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+
+  if (isMobile) {
+    return (
+      <Sheet open={mobileOpen} onOpenChange={onMobileToggle}>
+        <SheetContent 
+          side="left" 
+          className="w-80 p-0 bg-background border-r border-border/50"
+          style={{ 
+            background: 'linear-gradient(135deg, hsl(var(--background)), hsl(var(--background-deep)))',
+            backdropFilter: 'blur(20px)'
+          }}
+        >
+          <div className="h-full overflow-hidden">
+            <SidebarContent />
+          </div>
+        </SheetContent>
+      </Sheet>
+    );
+  }
+
+  return (
+    <motion.aside
+      initial={{ width: 280 }}
+      animate={{ width: collapsed ? 80 : 280 }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+      className={cn(
+        "fixed left-0 top-0 z-40 h-screen bg-background/95 backdrop-blur-sm border-r border-border/50 shadow-xl",
+        className
+      )}
+    >
+      <SidebarContent />
     </motion.aside>
   );
 }

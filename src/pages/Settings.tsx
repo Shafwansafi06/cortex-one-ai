@@ -34,10 +34,10 @@ export default function Settings() {
   };
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-6">Settings</h2>
+    <div className="p-4 md:p-6">
+      <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Settings</h2>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-4 md:gap-6 md:grid-cols-2">
         <Card>
           <CardHeader>
             <CardTitle>Account</CardTitle>

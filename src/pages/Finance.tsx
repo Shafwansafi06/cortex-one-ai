@@ -48,23 +48,39 @@ export default function Finance() {
   ];
 
   return (
-    <div className="space-y-8">
-      {/* Header */}
+    <div className="space-y-6 md:space-y-8 mt-4 mobile-container">
+      {/* Mobile-Optimized Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between"
+        className="bg-background/95 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-border/40 shadow-lg"
       >
-        <div>
-          <h1 className="text-3xl font-bold text-gradient">Finance AI</h1>
-          <p className="text-muted-foreground mt-2">
-            Automated invoice processing and financial intelligence
-          </p>
+        <div className="flex flex-col space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center">
+                <DollarSign className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl md:text-2xl font-bold text-gradient">Finance AI</h1>
+                <p className="text-xs md:text-sm text-muted-foreground">Financial Intelligence</p>
+              </div>
+            </div>
+            <Badge variant="outline" className="neon-glow px-3 py-1 bg-background/80 border-green-500/40">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2" />
+              Processing
+            </Badge>
+          </div>
+          
+          <div className="bg-background/80 rounded-xl p-4 border border-border/40 shadow-sm">
+            <h2 className="text-sm md:text-base font-medium text-foreground mb-2">
+              Automated invoice processing and financial intelligence
+            </h2>
+            <p className="text-xs md:text-sm text-muted-foreground">
+              Smart invoice analysis, GST compliance, and automated financial anomaly detection
+            </p>
+          </div>
         </div>
-        <Badge variant="outline" className="neon-glow">
-          <Calculator className="w-3 h-3 mr-1" />
-          Processing Active
-        </Badge>
       </motion.div>
   {/* Mockup */}
   <FinanceMockup />
